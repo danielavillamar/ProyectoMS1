@@ -11,7 +11,7 @@ import math
 #Ritmo de llegada de clientes por hora
 lam = 50
 #Velocidad de despachos por hora
-lam2 = 40
+lam2 = 100
 x = []
 simLy = []
 
