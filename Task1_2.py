@@ -1,35 +1,34 @@
 ## PROYECTO 1
-## Daniela Villamar 19086
+## Daniela Villamar 19086, Luis Pedro García 19344, Fernando Garavito
 ## El tiempo promedio de permanencia de un cliente en cola
+#Referencias: https://github.com/CJP0/M-M-s-K_Queue_Simulation, http://smartdrill.com/MMS-queueing-model.html
 
-from MMSK.mathAnalysis import *
+#Imports
 from MMSK.simulation import *
 import matplotlib.pyplot as plt
 import math
-    
-lam = 2
-mu = 1.5
-k = 8
+
+#Ritmo de llegada de clientes por hora
+lam = 50
+#Velocidad de despachos por hora
+lam2 = 30
 x = []
 Wy = []
 simWy = []
+#Probando con 2, hasta 7 cajas como combinaciones de variables
 for i in range(2, 8):
 	x.append(i)
-	quSim = queueSim(lam, mu, i, k, 10000)
+	quSim = queueSim(lam, lam2, i, 8, 10000)
 	quSim.simRun()
 	simWy.append(quSim.avgWaitTime)
-	Wy.append(W_(lam, mu, i, k)*60)
-print('MATH:x = ', x, ', y = ', Wy)
-print('SIM :x = ', x, ', y = ', simWy)
+print('Sim :x = ', x, ', y = ', simWy)
 plt.plot(x, simWy, 'ro-', label='sim')
-plt.plot(x, Wy, 'g^-', label='math')
-plt.title('W')
-plt.xlabel('s')
-plt.ylabel('W(min)')
+plt.title('Tiempo promedio de cliente en cola')
+plt.xlabel('Cajas')
+plt.ylabel('Espera(mins)')
 tempX = x
-for x, y in zip(x, Wy):
-	plt.text(x, y, '%.2f' % y, ha='center', va='bottom')
 
+#Plot
 for x, y in zip(tempX, simWy):
 	plt.text(x, y, '%.2f' % y, ha='center', va='bottom')
 plt.legend()
